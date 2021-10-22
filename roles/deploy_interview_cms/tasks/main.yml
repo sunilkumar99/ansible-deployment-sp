@@ -1,0 +1,11 @@
+---
+- name: Copy interview cms content to remote
+  copy:
+    src: '{{ local_interview_cms_release }}'
+    dest: '{{ remote_interview_cms_release }}'
+
+- name: Reload nginx
+  service:
+    name: nginx
+    state: reloaded
+  become: yes

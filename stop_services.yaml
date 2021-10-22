@@ -1,0 +1,96 @@
+- hosts: api1,api2
+  gather_facts: false
+  become: yes
+  vars_files:
+  - secret.yaml
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - stop_api
+  tags:
+  - api
+
+- hosts: code1,code2
+  gather_facts: false
+  become: yes
+  vars_files:
+  - secret.yaml
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - stop_backend
+  tags:
+  - backend
+
+- hosts: code1,code2
+  gather_facts: false
+  become: yes
+  vars_files:
+  - secret.yaml
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - stop_ds_backend
+  tags:
+  - dsbackend
+
+- hosts: cand1,cand2
+  gather_facts: false
+  become: yes
+  vars_files:
+  - secret.yaml
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - stop_candidate
+  tags:
+  - cand
+
+- hosts: cms1,cms2
+  gather_facts: false
+  become: yes
+  vars_files:
+  - secret.yaml
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - stop_cms
+  tags:
+  - cms
+
+- hosts: cand1,cand2
+  gather_facts: false
+  become: yes
+  vars_files:
+  - secret.yaml
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - stop_interview_candidate
+  tags:
+  - intcand
+
+- hosts: cron
+  collections:
+   - community.mysql
+  gather_facts: false
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  vars_files:
+  - secret.yaml
+  tasks:
+  - name: Disabling cron flag in db
+    mysql_query:
+      login_host: "{{MYSQL_HOST}}"
+      login_user: "{{MYSQL_USER}}"
+      login_password: "{{MYSQL_PASS}}"
+      login_db: assessment_db
+      query: UPDATE cron_job_status set active_status = %(active_status)s WHERE id = %(id_val)s
+      named_args:
+        id_val: 1
+        active_status: 0
+  - import_role:
+      name: stop_scheduler
+  tags:
+  - cron

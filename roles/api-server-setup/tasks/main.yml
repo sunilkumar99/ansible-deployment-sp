@@ -1,0 +1,58 @@
+---
+# tasks file for api-server-setup
+- name: Copy systemd apiservice.service file to server
+  copy:
+    src: '{{local_service_file_path}}/apiservice.service'
+    dest: '{{remote_service_file_path}}'
+    owner: root
+    group: root
+- name: Enabling syslog to separate file
+  replace:
+    dest: /etc/rsyslog.conf
+    regexp: '^#\s*{{ item.regex }}(.*)$'
+    replace: '{{ item.replace }}'
+  loop:
+  - regex: 'module\(load="imtcp"\)'
+    replace: 'module(load="imtcp")'
+  - regex: 'input\(type="imtcp" port="514"\)'
+    replace: 'input(type="imtcp" port="514")'
+- name: Copy log config to /etc/rsyslog.d
+  copy:
+    src: "{{ item }}"
+    dest: /etc/rsyslog.d
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - 30-apiservice.conf
+- name: Restarting systemctl rsyslog service
+  systemd:
+    state: restarted
+    name: rsyslog
+- name: Copy bash file to server
+  copy:
+    src: '{{local_service_file_path}}/apiservice'
+    dest: '{{remote_api_folder}}'
+    mode: 0755
+    owner: root
+    group: root
+  notify:
+  - Start apiservice
+- name: Copy config file to server
+  copy:
+    src: "{{ local_config_file_path }}"
+    dest: "{{ remote_config_file_path }}"
+    mode: 0755
+    owner: root
+    group: root
+- name: Copy GeoIP file to server
+  copy:
+    src: "{{ geoip_local_file_path }}"
+    dest: "{{ geoip_remote_file_path }}"
+    mode: 0755
+    owner: root
+    group: root
+- name: Creating directory
+  file:
+    state: directory
+    path: '{{efs_directory}}'

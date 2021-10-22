@@ -1,0 +1,4 @@
+---
+# vars file for deploy_cms
+local_cms_release: /home/ubuntu/radhey/release/cms/
+remote_cms_release: /var/www/lcm.techgig.com

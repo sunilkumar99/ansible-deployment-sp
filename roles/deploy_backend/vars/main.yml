@@ -1,0 +1,11 @@
+---
+# vars file for deploy_backend
+local_config_file_path: /home/ubuntu/radhey/release/config/backend/conf/
+remote_config_file_path: /etc/techgig/
+local_release_folder: /home/ubuntu/radhey/release/backend/assessment_backend
+remote_release_folder: /opt/assessment_backend/assessment_backend
+local_docker_yaml: /home/ubuntu/radhey/release/k8s_yaml/
+remote_docker_yaml: /opt/docker-yaml/
+os_environment:
+  - key: ENVIRONMENT
+    value : PROD

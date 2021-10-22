@@ -1,0 +1,8 @@
+---
+- name: efs mount check
+  hosts: all
+  tasks:
+    - name: check is efs mounted or not
+      command: "ls /efs"
+      with_items: "{{ ansible_mounts }}"
+      when: item.mount == "/efs"

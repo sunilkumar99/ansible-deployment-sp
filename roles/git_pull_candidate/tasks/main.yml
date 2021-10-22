@@ -1,0 +1,29 @@
+---
+  - name: Check for repo folder exist
+    stat:
+      path: '{{repo_base_path}}/{{repo_name}}'
+    register: p
+  - name: Resetting local changes
+    shell:
+      cmd: "git reset --hard"
+      chdir: '{{repo_base_path}}/{{repo_name}}'
+    when: p.stat.exists
+    delegate_to: localhost
+  - name: Pulling code from master branch
+    git:
+      repo: 'https://{{ GIT_USER_NAME | urlencode }}:{{ GIT_PASSWORD | urlencode }}@bitbucket.org/times_internet/{{ repo_name }}.git'
+      dest: '{{repo_base_path}}/{{repo_name}}'
+      version: master
+    when: p.stat.exists
+    delegate_to: localhost
+  - name: Ansible Git Module with Username Password.
+    git:
+     repo: 'https://{{ GIT_USER_NAME | urlencode }}:{{ GIT_PASSWORD | urlencode }}@bitbucket.org/times_internet/{{ repo_name }}.git'
+     dest: '{{repo_base_path}}/{{repo_name}}'
+    when: not p.stat.exists
+    delegate_to: localhost
+  - name: Copy environment file to build directory.
+    copy:
+      src: environment.prod.ts
+      dest: '{{build_repo_environment_file}}'
+    delegate_to: localhost

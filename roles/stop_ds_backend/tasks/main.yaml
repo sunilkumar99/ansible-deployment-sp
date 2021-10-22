@@ -1,0 +1,13 @@
+---
+  - name: Disable Traffic on Selected Machine
+    uri:
+      url: "http://{{ inventory_hostname }}:8190/configure?traffic=off"
+      follow_redirects: none
+      method: GET
+    register: _result
+    delegate_to: 127.0.0.1
+    ignore_errors: yes
+  - name: Pausing for 60 seconds for connections to drain
+    pause: seconds=60
+  - name: Stopping backend service dsbackendservice
+    service: name=dsbackendservice state=stopped

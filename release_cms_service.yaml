@@ -1,0 +1,50 @@
+---
+- hosts: cms1,cms2
+  gather_facts: true
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - cms_server_setup
+  tags:
+  - setup
+
+- hosts: cms1,cms2
+  gather_facts: true
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - docker-setup
+  tags:
+  - docker
+
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+  - secret.yaml
+  roles:
+  - git_pull_cms
+  tags:
+  - gitpull
+
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+  - secret.yaml
+  roles:
+  - create_cms_build
+  tags:
+  - build
+
+- hosts: cms1,cms2
+  gather_facts: true
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - deploy_nginx_cms_docker
+  tags:
+  - deploy

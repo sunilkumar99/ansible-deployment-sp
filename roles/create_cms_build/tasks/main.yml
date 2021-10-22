@@ -1,0 +1,19 @@
+---
+  - name: Running build command npm i --save && ng build --prod
+    shell:
+      cmd: "npm i --save && ng build --prod"
+      chdir: '{{repo_base_path}}/{{repo_name}}'
+    register: ng_result
+  - name: "ng build task output"
+    debug:
+     var: ng_result
+  - name: Clean artifact path
+    file:
+      state: absent
+      path: '{{release_base_folder}}/cms/'
+    delegate_to: localhost
+  - name: copy build file locally.
+    copy:
+      src: '{{repo_base_path}}/{{repo_name}}/dist/angular-material-admin/'
+      dest: '{{release_base_folder}}/cms/'
+    delegate_to: localhost

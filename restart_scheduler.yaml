@@ -1,0 +1,34 @@
+- hosts: cron
+  collections:
+   - community.mysql
+  gather_facts: false
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  vars_files:
+  - secret.yaml
+  tasks:
+  - name: Disabling cron flag in db
+    mysql_query:
+      login_host: "{{MYSQL_HOST}}"
+      login_user: "{{MYSQL_USER}}"
+      login_password: "{{MYSQL_PASS}}"
+      login_db: assessment_db
+      query: UPDATE cron_job_status set active_status = %(active_status)s WHERE id = %(id_val)s
+      named_args:
+        id_val: 1
+        active_status: 0
+  - import_role:
+      name: restart_scheduler
+  - name: Enabling cron flag in db
+    mysql_query:
+      login_host: "{{MYSQL_HOST}}"
+      login_user: "{{MYSQL_USER}}"
+      login_password: "{{MYSQL_PASS}}"
+      login_db: assessment_db
+      query: UPDATE cron_job_status set active_status = %(active_status)s WHERE id = %(id_val)s
+      named_args:
+        id_val: 1
+        active_status: 1
+  tags:
+  - deploy

@@ -1,0 +1,4 @@
+---
+# vars file
+local_docker_yaml: /home/ubuntu/radhey/release/k8s_yaml/
+remote_docker_yaml: /opt/docker-yaml/

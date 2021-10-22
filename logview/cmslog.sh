@@ -1,0 +1,1 @@
+multitail -l 'ssh cms1 "docker logs -f $(ssh cms1 "docker ps -aqf "name=nginxcms"")"' -l 'ssh cms2 "docker logs -f $(ssh cms2 "docker ps -aqf "name=nginxcms"")"'

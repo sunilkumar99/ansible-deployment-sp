@@ -1,0 +1,9 @@
+- hosts: code1,code2
+  gather_facts: false
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - restart_backend
+  tags:
+  - restart

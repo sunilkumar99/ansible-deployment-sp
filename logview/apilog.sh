@@ -1,0 +1,1 @@
+multitail -l 'ssh api1 "tail -f /tmp/api/app_log.log"' -l 'ssh api2 "tail -f /tmp/api/app_log.log"'

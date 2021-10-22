@@ -1,0 +1,26 @@
+---
+  - name: Disable Traffic on Selected Machine
+    uri:
+      url: "http://{{ inventory_hostname }}:8190/configure?traffic=off"
+      follow_redirects: none
+      method: GET
+    register: _result
+    delegate_to: 127.0.0.1
+    ignore_errors: yes
+  - name: Pausing for 60 seconds for connections to drain
+    pause: seconds=60
+  - name: Restart backend service dsbackendservice
+    service: name=dsbackendservice state=restarted
+  - name: Wait for port 8190 to Respond
+    wait_for: port=8190 delay=2 timeout=150
+  - name:  Wait for Healthecheckup to succeed
+    delegate_to: 127.0.0.1
+    uri:
+      url: "http://{{ inventory_hostname }}:8190/healthcheck"
+      follow_redirects: none
+      method: GET
+    register: result
+    until: result.status == 200
+    retries: 5
+    delay: 5
+    changed_when: false

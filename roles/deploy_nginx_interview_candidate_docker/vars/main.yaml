@@ -1,0 +1,6 @@
+log_opt_max_size: "50M"
+log_opt_max_file: "5"
+docker_memory_limit: "1024M"
+remote_config_file_path: /opt/nginx_interview_candidate_config/
+local_interview_cand_release: /home/ubuntu/radhey/release/interview_candidate/
+remote_interview_cand_release: /opt/nginx_interview_cand/

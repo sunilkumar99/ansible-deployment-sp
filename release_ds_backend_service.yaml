@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+  - secret.yaml
+  roles:
+  - create_ds_backend_build
+  tags:
+  - build
+
+- hosts: code1,code2
+  gather_facts: yes
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - deploy_ds_backend
+  tags:
+  - deploy

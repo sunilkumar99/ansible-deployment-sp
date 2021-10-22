@@ -1,0 +1,14 @@
+---
+  - name: "Calling Url for creating fleet on k8s server"
+    uri:
+      url: http://prod-assessment-backend-654996291.ap-south-1.elb.amazonaws.com/admin/createfleet
+      method: POST
+      body: "{{ item }}"
+      status_code: 200
+      body_format: json
+    loop: "{{ create_fleet_request }}"
+    when: "item.fleetName == 'monovncbased'"
+    register: result
+  - name: Url Response
+    debug:
+      msg: "{{result.results}}"

@@ -1,0 +1,6 @@
+---
+- name: Start cronservice
+  systemd:
+    name: cronservice
+    state: started
+    enabled: yes

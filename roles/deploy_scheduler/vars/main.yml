@@ -1,0 +1,6 @@
+---
+# vars file for deploy_scheduler
+remote_cron_folder: /opt/assessment_cron/
+local_config_file_path: /home/ubuntu/radhey/release/config/cron/conf/
+remote_config_file_path: /etc/assessment/
+release_base_folder: /home/ubuntu/radhey/release

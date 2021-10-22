@@ -1,0 +1,12 @@
+---
+- name: Start backendservice
+  systemd:
+    name: backendservice
+    state: started
+    enabled: yes
+
+- name: Start dsbackendservice
+  systemd:
+    name: dsbackendservice
+    state: started
+    enabled: yes

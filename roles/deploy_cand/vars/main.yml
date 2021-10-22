@@ -1,0 +1,4 @@
+---
+# vars file for deploy_cand
+local_cand_release: /home/ubuntu/radhey/release/candidate/
+remote_cand_release: /var/www/lcc.techgig.com

@@ -1,0 +1,50 @@
+---
+- hosts: cand1,cand2
+  gather_facts: true
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - candidate_server_setup
+  tags:
+  - setup
+
+- hosts: cand1,cand2
+  gather_facts: true
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - docker-setup
+  tags:
+  - docker
+
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+  - secret.yaml
+  roles:
+  - git_pull_candidate
+  tags:
+  - gitpull
+
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+  - secret.yaml
+  roles:
+  - create_candidate_build
+  tags:
+  - build
+
+- hosts: cand1,cand2
+  gather_facts: true
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - deploy_nginx_candidate_docker
+  tags:
+  - deploy

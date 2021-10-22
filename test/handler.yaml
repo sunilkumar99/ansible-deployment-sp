@@ -1,0 +1,23 @@
+---
+- name: setup web server
+  hosts: all
+  tasks:
+    - name: install httpd
+      apt:
+        name: httpd
+        state: present
+    - name: copy index.html
+      copy:
+        src: /tmp/index.html
+        dest: /var/www/html/index.html
+      nofity:
+        - restart_web
+    - name: copy nothing - intended fail
+      copy:
+        src: /tmp/nothing
+        dest: /var/www/html/index.html
+  handlers:
+    - name: restart_web
+      service:
+        name: httpd
+        state: restarted

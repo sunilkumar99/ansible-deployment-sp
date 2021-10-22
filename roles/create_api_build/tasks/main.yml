@@ -1,0 +1,30 @@
+---
+  - name: Running mvn clean
+    shell:
+      cmd: "mvn clean install"
+      chdir: '{{repo_base_path}}/{{repo_name}}'
+    register: mvn_result
+
+  - name: "mvn clean task output"
+    debug:
+     var: mvn_result
+  - name: Clean api artifact path
+    file:
+      state: absent
+      path: '{{release_base_folder}}/api/'
+    delegate_to: localhost
+  - name: Clean cron artifact path
+    file:
+      state: absent
+      path: '{{release_base_folder}}/cron/'
+    delegate_to: localhost
+  - name: copy api file locally.
+    copy:
+     src: '{{repo_base_path}}/{{repo_name}}/api/target/api-2.0.jar'
+     dest: '{{release_base_folder}}/api/'
+    delegate_to: localhost
+  - name: copy scheduler file locally.
+    copy:
+     src: '{{repo_base_path}}/{{repo_name}}/scheduler/target/scheduler-2.0.jar'
+     dest: '{{release_base_folder}}/cron/'
+    delegate_to: localhost

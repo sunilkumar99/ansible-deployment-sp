@@ -1,0 +1,20 @@
+---
+- name: Log into aws ecr docker registry
+  shell: "$(/usr/local/bin/aws ecr get-login --no-include-email --region us-east-1)"
+- name: Creating faceApi container
+  docker_container:
+    name: PythonFaceApi
+    image: 845770902133.dkr.ecr.ap-south-1.amazonaws.com/faceapi-tg:v1
+    recreate: yes
+    pull: yes
+    restart_policy: always
+    detach: yes
+    log_driver: json-file
+    log_opt:
+      max-size: '{{ log_opt_max_size }}'
+      max-file: '{{ log_opt_max_file }}'
+    volumes:
+    - "/efs/snapshot:/efs/snapshot"
+    ports:
+    - "8189:8000"
+    #memory: '{{ docker_memory_limit }}'

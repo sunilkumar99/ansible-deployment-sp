@@ -1,0 +1,9 @@
+---
+local_service_file_path: /home/ubuntu/radhey/release/config/api/
+remote_service_file_path: /etc/systemd/system/
+local_config_file_path: /home/ubuntu/radhey/release/config/api/conf/
+remote_config_file_path: /etc/assessment/
+remote_api_folder: /opt/assessment_api/
+geoip_local_file_path: /home/ubuntu/radhey/GeoIP/GeoIP2-Country.mmdb
+geoip_remote_file_path: /usr/share/GeoIP/GeoIP2-Country.mmdb
+efs_directory: /efs/prod

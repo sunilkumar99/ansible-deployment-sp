@@ -1,0 +1,6 @@
+---
+# vars file for deploy_backend
+local_config_file_path: /home/ubuntu/radhey/release/config/dsmanager/conf/
+remote_config_file_path: /etc/techgig/aws
+local_release_folder: /home/ubuntu/radhey/release/ds_backend/assessment_aws_instance_manager
+remote_release_folder: /opt/assessment_ds_backend/assessment_aws_instance_manager

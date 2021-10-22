@@ -1,0 +1,22 @@
+[cmsserver]
+cms1 ansible_ssh_private_key_file=/home/ubuntu/.ssh/id_rsa
+cms2 ansible_ssh_private_key_file=/home/ubuntu/.ssh/id_rsa
+
+[candserver]
+cand1
+cand2
+
+[codeevalserver]
+code1
+code2
+
+[cronserver]
+cron
+
+[apiserver]
+api1
+api2
+
+[dsmanager]
+code1
+code2

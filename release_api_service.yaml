@@ -1,0 +1,40 @@
+---
+- hosts: api1,api2
+  gather_facts: false
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - api-server-setup
+  tags:
+  - setup
+
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+  - secret.yaml
+  roles:
+  - git_pull_api
+  tags:
+  - gitpull
+
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+  - secret.yaml
+  roles:
+  - create_api_build
+  tags:
+  - build
+
+- hosts: api1,api2
+  gather_facts: false
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - deploy_api
+  tags:
+  - deploy

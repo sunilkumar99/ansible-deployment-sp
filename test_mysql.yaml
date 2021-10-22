@@ -1,0 +1,7 @@
+- hosts: localhost
+  collections:
+   - community.mysql
+  tasks:
+   - name: Collect all possible information using passwordless root access
+     mysql_query:
+      login_user: root

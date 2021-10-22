@@ -1,0 +1,4 @@
+---
+# vars file for deploy_cms
+local_interview_candidate_release: /home/ubuntu/radhey/release/interview_candidate/
+remote_interview_candidate_release: /var/www/lincc.techgig.com

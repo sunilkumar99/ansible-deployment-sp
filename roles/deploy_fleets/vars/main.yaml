@@ -1,0 +1,1 @@
+create_fleet_request: "{{ lookup('file', 'create_fleet_request.json') }}"

@@ -1,0 +1,12 @@
+---
+- hosts: code1,code2
+  gather_facts: true
+  become: yes
+  vars_files:
+  - secret.yaml
+  roles:
+  - role: awscli
+    aws_output_format: 'json'
+    aws_region: 'ap-south-1'
+    aws_access_key_id: '{{AWS_ACCESS_KEY}}'   # Don't version this or put it on pastebin
+    aws_secret_access_key: '{{AWS_SECRET}}'  # Ditto

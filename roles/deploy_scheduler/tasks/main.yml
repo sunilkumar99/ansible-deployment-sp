@@ -1,0 +1,24 @@
+---
+# tasks file for deploy_cronservice
+- name: Pausing for 120 seconds for tasks to drain
+  pause: seconds=120
+- name: Stopping Scheduler service cronservice
+  service: name=cronservice state=stopped
+- name: Copy enviroment config file to server
+  copy:
+    src: "{{ local_config_file_path }}"
+    dest: "{{ remote_config_file_path }}"
+    mode: 0644
+    owner: root
+    group: root
+- name: Copy Scheduler jar file to server
+  copy:
+    src: '{{release_base_folder}}/cron/scheduler-2.0.jar'
+    dest: '{{ remote_cron_folder }}/scheduler-2.0.jar'
+    mode: 0644
+    owner: root
+    group: root
+- name: Restart Scheduler service cronservice
+  service: name=cronservice state=restarted
+- name: Pausing for 30 seconds for startup CronService
+  pause: seconds=30

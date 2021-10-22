@@ -1,0 +1,70 @@
+---
+# tasks file for coding-server-setup
+- name: Copy backendservice.service service file to server
+  copy:
+    src: '{{local_service_file_path}}/backend/backendservice.service'
+    dest: '{{ remote_service_file_path }}'
+    owner: root
+    group: root
+- name: Copy config file to server
+  copy:
+    src: '{{ local_config_file_path }}/backend/conf/'
+    dest: '{{remote_config_file_path}}'
+    mode: 0755
+    owner: root
+    group: root
+- name: Create {{remote_backend_path}} directory example
+  file:
+    path: '{{ remote_backend_path }}'
+    state: directory
+- name: Create {{remote_ds_banckend_path}} directory example
+  file:
+    path: '{{ remote_ds_banckend_path }}'
+    state: directory
+- name: Copy systemd dsbackendservice.service file to server
+  copy:
+    src: '{{local_service_file_path}}/dsmanager/dsbackendservice.service'
+    dest: '{{ remote_service_file_path }}'
+    owner: root
+    group: root
+- name: Enabling syslog to separate file
+  replace:
+    dest: /etc/rsyslog.conf
+    regexp: '^#\s*{{ item.regex }}(.*)$'
+    replace: '{{ item.replace }}'
+  loop:
+  - regex: 'module\(load="imtcp"\)'
+    replace: 'module(load="imtcp")'
+  - regex: 'input\(type="imtcp" port="514"\)'
+    replace: 'input(type="imtcp" port="514")'
+- name: Copy log config to /etc/rsyslog.d
+  copy:
+    src: "{{ item }}"
+    dest: /etc/rsyslog.d
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - 30-backendservice.conf
+    - 30-dsbackendservice.conf
+- name: Restarting systemctl rsyslog service
+  systemd:
+    state: restarted
+    name: rsyslog
+  notify:
+  - Start backendservice
+  - Start dsbackendservice
+
+- name: Copy config file to server
+  copy:
+    src: '{{ local_config_file_path }}/dsmanager/conf/'
+    dest: '{{remote_config_file_path}}/aws/'
+    mode: 0755
+    owner: root
+    group: root
+- name: Synchronization yaml folder
+  synchronize:
+    src: "{{ local_docker_yaml }}"
+    dest: "{{ remote_docker_yaml }}"
+    checksum: yes
+    times: no

@@ -1,0 +1,110 @@
+[
+  {
+    "fleetAutoScalerName": "openjdk7-autoscaler",
+    "filePath": "/opt/docker-yaml/openjdk/7/fleetautoscaler.yaml"
+  },
+  {
+    "fleetAutoScalerName": "openjdk8-autoscaler",
+    "filePath": "/opt/docker-yaml/openjdk/8/fleetautoscaler.yaml"
+  },
+  {
+    "fleetAutoScalerName": "elixirtg-autoscaler",
+    "filePath": "/opt/docker-yaml/elixir/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "erlang-autoscaler",
+    "filePath": "/opt/docker-yaml/erlang/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "clojuretg-autoscaler",
+    "filePath": "/opt/docker-yaml/clojure/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "groovytg-autoscaler",
+    "filePath": "/opt/docker-yaml/groovy/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "haskell-autoscaler",
+    "filePath": "/opt/docker-yaml/haskell/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "nimtg-autoscaler",
+    "filePath": "/opt/docker-yaml/nim/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "scalatg-autoscaler",
+    "filePath": "/opt/docker-yaml/scala/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "smalltalk-autoscaler",
+    "filePath": "/opt/docker-yaml/smalltalk/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "swifttg-autoscaler",
+    "filePath": "/opt/docker-yaml/swift/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "swipltg-autoscaler",
+    "filePath": "/opt/docker-yaml/swipl/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "perltg-autoscaler",
+    "filePath": "/opt/docker-yaml/perl/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "rbasetg-autoscaler",
+    "filePath": "/opt/docker-yaml/rbase/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "rubytg-autoscaler",
+    "filePath": "/opt/docker-yaml/ruby/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "pypytwotg-autoscaler",
+    "filePath": "/opt/docker-yaml/pypy/2/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "pypythreetg-autoscaler",
+    "filePath": "/opt/docker-yaml/pypy/3/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "gnucobol-autoscaler",
+    "filePath": "/opt/docker-yaml/cobol/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "commononetg-autoscaler",
+    "filePath": "/opt/docker-yaml/common-one/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "rusttg-autoscaler",
+    "filePath": "/opt/docker-yaml/rust/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "commononetwotg-autoscaler",
+    "filePath": "/opt/docker-yaml/common-two/fleetautoscaler.yaml"
+},{
+	"fleetAutoScalerName": "gccbased-autoscaler",
+	"filePath": "/opt/docker-yaml/gccbased/fleetautoscaler.yaml"
+},{
+	"fleetAutoScalerName": "golang-tg-autoscaler",
+	"filePath": "/opt/docker-yaml/golang/fleetautoscaler.yaml"
+},{
+	"fleetAutoScalerName": "python2-autoscaler",
+	"filePath": "/opt/docker-yaml/python/2/fleetautoscaler.yaml"
+},{
+	"fleetAutoScalerName": "python3-autoscaler",
+	"filePath": "/opt/docker-yaml/python/3/fleetautoscaler.yaml"
+},{
+	"fleetAutoScalerName": "php5-autoscaler",
+	"filePath": "/opt/docker-yaml/php/5.6/fleetautoscaler.yaml"
+},{
+	"fleetAutoScalerName": "php7-autoscaler",
+	"filePath": "/opt/docker-yaml/php/7.3/fleetautoscaler.yaml"
+},{
+	"fleetAutoScalerName": "jupternotebook-autoscaler",
+	"filePath": "/opt/docker-yaml/jupyter-notebook/fleetautoscaler.yaml"
+},{
+	"fleetAutoScalerName": "ubuntuterminal-autoscaler",
+	"filePath": "/opt/docker-yaml/ubuntu-terminal/fleetautoscaler.yaml"
+},{
+	"fleetAutoScalerName": "javawebproject-autoscaler",
+	"filePath": "/opt/docker-yaml/java-web-project/fleetautoscaler.yaml"
+},{
+	"fleetAutoScalerName": "htmlwebapp-autoscaler",
+	"filePath": "/opt/docker-yaml/html-web/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "javamaven-autoscaler",
+    "filePath": "/opt/docker-yaml/java-project/maven/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "javagradle-autoscaler",
+    "filePath": "/opt/docker-yaml/java-project/gradle/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "objectiveclang-autoscaler",
+    "filePath": "/opt/docker-yaml/objective-c/fleetautoscaler.yaml"
+},{
+    "fleetAutoScalerName": "monovncbased-autoscaler",
+    "filePath": "/opt/docker-yaml/mono-vnc-based/fleetautoscaler.yaml"
+}
+]

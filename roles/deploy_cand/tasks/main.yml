@@ -1,0 +1,11 @@
+---
+- name: Copy Candidate content to remote
+  copy:
+    src: '{{ local_cand_release }}'
+    dest: '{{ remote_cand_release }}'
+
+- name: Reload nginx
+  service:
+    name: nginx
+    state: reloaded
+  become: yes

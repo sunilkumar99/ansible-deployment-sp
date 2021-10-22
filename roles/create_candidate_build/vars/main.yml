@@ -1,0 +1,6 @@
+---
+repo_name: techgig_candidate
+repo_base_path: /home/ubuntu/radhey/repo_workspace
+release_base_folder: /home/ubuntu/radhey/release
+build_repo_environment_file: /home/ubuntu/radhey/repo_workspace/techgig_candidate/src/environments/environment.prod.ts
+

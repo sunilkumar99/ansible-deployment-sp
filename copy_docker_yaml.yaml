@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+  - secret.yaml
+  roles:
+  - create_docker_backend_build
+  tags:
+  - build
+
+- hosts: code1,code2
+  gather_facts: no
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - deploy_docker_yaml_config
+  tags:
+  - deploy

@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+  - secret.yaml
+  roles:
+  - create_interview_cms_build
+  tags:
+  - build
+
+- hosts: cms1,cms2
+  gather_facts: true
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - deploy_interview_cms
+  tags:
+  - deploy

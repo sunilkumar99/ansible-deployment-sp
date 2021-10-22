@@ -1,0 +1,1 @@
+multitail -l 'ssh code1 "tail -f /var/log/dsbackendservice/dsbackendservice.log"' -l 'ssh code2 "tail -f /var/log/dsbackendservice/dsbackendservice.log"'

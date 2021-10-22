@@ -1,0 +1,8 @@
+---
+# tasks file for restarting_cronservice
+- name: Pausing for 120 seconds for tasks to drain
+  pause: seconds=120
+- name: Restart Scheduler service cronservice
+  service: name=cronservice state=restarted
+- name: Pausing for 30 seconds for startup CronService
+  pause: seconds=30

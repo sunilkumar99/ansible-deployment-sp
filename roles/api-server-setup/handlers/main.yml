@@ -1,0 +1,6 @@
+---
+- name: Start apiservice
+  systemd:
+    name: apiservice
+    state: started
+    enabled: yes

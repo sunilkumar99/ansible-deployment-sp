@@ -1,0 +1,1 @@
+multitail -l 'ssh code1 "tail -f /tmp/assessment/aws/app.log"' -l 'ssh code2 "tail -f /tmp/assessment/aws/app.log"'

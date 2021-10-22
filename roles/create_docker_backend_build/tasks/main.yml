@@ -1,0 +1,31 @@
+---
+  - name: Check for repo folder exist
+    stat:
+      path: '{{repo_base_path}}/{{repo_name}}'
+    register: p
+  - name: Pulling code from master branch
+    git:
+      repo: 'https://{{ GIT_USER_NAME | urlencode }}:{{ GIT_PASSWORD | urlencode }}@bitbucket.org/times_internet/{{ repo_name }}.git'
+      dest: '{{repo_base_path}}/{{repo_name}}'
+      version: master
+    register: git_pull_result
+    when: p.stat.exists
+  - name: "git pull task output"
+    debug:
+     var: git_pull_result
+    when: p.stat.exists
+  - name: Ansible Git Module with Username Password.
+    git:
+     repo: 'https://{{ GIT_USER_NAME | urlencode }}:{{ GIT_PASSWORD | urlencode }}@bitbucket.org/times_internet/{{ repo_name }}.git'
+     dest: '{{repo_base_path}}/{{repo_name}}'
+    when: not p.stat.exists
+  - name: Clean yaml folder path
+    file:
+      state: absent
+      path: '{{local_docker_yaml}}'
+    delegate_to: localhost
+  - name: copy yaml file locally.
+    copy:
+     src: '{{repo_base_path}}/{{repo_name}}/yaml/'
+     dest: '{{local_docker_yaml}}'
+    delegate_to: localhost

@@ -1,0 +1,112 @@
+[
+  {
+    "fleetName": "openjdk7",
+    "filePath": "/opt/docker-yaml/openjdk/7/fleet.yaml"
+  },
+  {
+    "fleetName": "openjdk8",
+    "filePath": "/opt/docker-yaml/openjdk/8/fleet.yaml"
+  },
+  {
+    "fleetName": "elixirtg",
+    "filePath": "/opt/docker-yaml/elixir/fleet.yaml"
+},{
+    "fleetName": "erlang",
+    "filePath": "/opt/docker-yaml/erlang/fleet.yaml"
+},{
+    "fleetName": "clojuretg",
+    "filePath": "/opt/docker-yaml/clojure/fleet.yaml"
+},{
+    "fleetName": "groovytg",
+    "filePath": "/opt/docker-yaml/groovy/fleet.yaml"
+},{
+    "fleetName": "haskell",
+    "filePath": "/opt/docker-yaml/haskell/fleet.yaml"
+},{
+    "fleetName": "nimtg",
+    "filePath": "/opt/docker-yaml/nim/fleet.yaml"
+},{
+    "fleetName": "scalatg",
+    "filePath": "/opt/docker-yaml/scala/fleet.yaml"
+},{
+    "fleetName": "smalltalk",
+    "filePath": "/opt/docker-yaml/smalltalk/fleet.yaml"
+},{
+    "fleetName": "swifttg",
+    "filePath": "/opt/docker-yaml/swift/fleet.yaml"
+},{
+    "fleetName": "swipltg",
+    "filePath": "/opt/docker-yaml/swipl/fleet.yaml"
+},{
+    "fleetName": "perltg",
+    "filePath": "/opt/docker-yaml/perl/fleet.yaml"
+},{
+    "fleetName": "rbasetg",
+    "filePath": "/opt/docker-yaml/rbase/fleet.yaml"
+},{
+    "fleetName": "rubytg",
+    "filePath": "/opt/docker-yaml/ruby/fleet.yaml"
+},{
+    "fleetName": "pypytwotg",
+    "filePath": "/opt/docker-yaml/pypy/2/fleet.yaml"
+},{
+    "fleetName": "pypythreetg",
+    "filePath": "/opt/docker-yaml/pypy/3/fleet.yaml"
+},{
+    "fleetName": "gnucobol",
+    "filePath": "/opt/docker-yaml/cobol/fleet.yaml"
+},{
+    "fleetName": "commononetg",
+    "filePath": "/opt/docker-yaml/common-one/fleet.yaml"
+},{
+    "fleetName": "rusttg",
+    "filePath": "/opt/docker-yaml/rust/fleet.yaml"
+},{
+    "fleetName": "commononetwotg",
+    "filePath": "/opt/docker-yaml/common-two/fleet.yaml"
+},{
+	"fleetName": "gccbased",
+	"filePath": "/opt/docker-yaml/gccbased/fleet.yaml"
+},{
+	"fleetName": "golang-tg",
+	"filePath": "/opt/docker-yaml/golang/fleet.yaml"
+},{
+	"fleetName": "python2",
+	"filePath": "/opt/docker-yaml/python/2/fleet.yaml"
+},{
+	"fleetName": "python3",
+	"filePath": "/opt/docker-yaml/python/3/fleet.yaml"
+},{
+	"fleetName": "php5",
+	"filePath": "/opt/docker-yaml/php/5.6/fleet.yaml"
+},{
+	"fleetName": "php7",
+	"filePath": "/opt/docker-yaml/php/7.3/fleet.yaml"
+},{
+	"fleetName": "jupternotebook",
+	"filePath": "/opt/docker-yaml/jupyter-notebook/fleet.yaml"
+},{
+	"fleetName": "ubuntuterminal",
+	"filePath": "/opt/docker-yaml/ubuntu-terminal/fleet.yaml"
+},{
+	"fleetName": "javawebproject",
+	"filePath": "/opt/docker-yaml/java-web-project/fleet.yaml"
+},{
+	"fleetName": "htmlwebapp",
+	"filePath": "/opt/docker-yaml/html-web/fleet.yaml"
+},{
+    "fleetName": "javamaven",
+    "filePath": "/opt/docker-yaml/java-project/maven/fleet.yaml"
+},{
+    "fleetName": "javagradle",
+    "filePath": "/opt/docker-yaml/java-project/gradle/fleet.yaml"
+},{
+    "fleetName": "objectiveclang",
+    "filePath": "/opt/docker-yaml/objective-c/fleet.yaml"
+},{
+    "fleetName": "monovncbased",
+    "filePath": "/opt/docker-yaml/mono-vnc-based/fleet.yaml"
+}
+
+
+]

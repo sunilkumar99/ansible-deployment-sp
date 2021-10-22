@@ -1,0 +1,40 @@
+---
+  - name: Check for repo folder exist
+    stat:
+      path: '{{repo_base_path}}/{{repo_name}}'
+    register: p
+  - name: Pulling code from master branch
+    git:
+      repo: 'https://{{ GIT_USER_NAME | urlencode }}:{{ GIT_PASSWORD | urlencode }}@bitbucket.org/times_internet/{{ repo_name }}.git'
+      dest: '{{repo_base_path}}/{{repo_name}}'
+      version: master
+    register: git_pull_result
+    when: p.stat.exists
+  - name: "git pull task output"
+    debug:
+     var: git_pull_result
+    when: p.stat.exists
+  - name: Ansible Git Module with Username Password.
+    git:
+     repo: 'https://{{ GIT_USER_NAME | urlencode }}:{{ GIT_PASSWORD | urlencode }}@bitbucket.org/times_internet/{{ repo_name }}.git'
+     dest: '{{repo_base_path}}/{{repo_name}}'
+    when: not p.stat.exists
+  - name: Running go build command
+    shell:
+      cmd: "go build"
+      chdir: '{{repo_base_path}}/{{repo_name}}'
+    register: build_result
+
+  - name: "go build task output"
+    debug:
+     var: build_result
+  - name: Clean backend artifact path
+    file:
+      state: absent
+      path: '{{release_base_folder}}/backend/'
+    delegate_to: localhost
+  - name: copy backend file locally.
+    copy:
+     src: '{{repo_base_path}}/{{repo_name}}/assessment_backend'
+     dest: '{{release_base_folder}}/backend/'
+    delegate_to: localhost

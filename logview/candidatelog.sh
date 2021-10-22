@@ -1,0 +1,1 @@
+multitail -l 'ssh cand1 "docker logs -f $(ssh cand1 "docker ps -aqf "name=nginxcand"")"' -l 'ssh cand2 "docker logs -f $(ssh cand2 "docker ps -aqf "name=nginxcand"")"'

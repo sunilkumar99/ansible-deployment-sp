@@ -1,0 +1,5 @@
+---
+repo_name: interview_cms
+repo_base_path: /home/ubuntu/radhey/repo_workspace
+release_base_folder: /home/ubuntu/radhey/release
+build_repo_environment_file: /home/ubuntu/radhey/repo_workspace/interview_cms/src/environments/environment.prod.ts

@@ -1,0 +1,43 @@
+---
+# tasks file for deploy_api
+  - name: Disable Traffic on Selected Machine
+    uri:
+      url: "http://{{ inventory_hostname }}:9090/configure?traffic=off"
+      follow_redirects: none
+      method: GET
+    register: _result
+    delegate_to: 127.0.0.1
+    ignore_errors: yes
+  - name: Pausing for 35 seconds for connections to drain
+    pause: seconds=35
+  - name: Stopping Api service apiservice
+    service: name=apiservice state=stopped
+  - name: Copy enviroment config file to server
+    copy:
+      src: "{{ local_config_file_path }}"
+      dest: "{{ remote_config_file_path }}"
+      mode: 0644
+      owner: root
+      group: root
+  - name: Copy Api jar file to server
+    copy:
+      src: '{{release_base_folder}}/api/api-2.0.jar'
+      dest: '{{ remote_api_folder }}/api-2.0.jar'
+      mode: 0644
+      owner: root
+      group: root
+  - name: Restart Api service apiservice
+    service: name=apiservice state=restarted
+  - name: Wait for port 9090 to Respond
+    wait_for: port=9090 delay=2 timeout=150
+  - name:  Wait for Healthecheckup to succeed
+    delegate_to: 127.0.0.1
+    uri:
+      url: "http://{{ inventory_hostname }}:9090/healthcheck"
+      follow_redirects: none
+      method: GET
+    register: result
+    until: result.msg.find("OK") != -1
+    retries: 5
+    delay: 5
+    changed_when: false

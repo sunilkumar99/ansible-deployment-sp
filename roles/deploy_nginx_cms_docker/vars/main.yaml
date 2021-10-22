@@ -1,0 +1,6 @@
+log_opt_max_size: "50M"
+log_opt_max_file: "5"
+docker_memory_limit: "1024M"
+remote_config_file_path: /opt/nginx_cms_config/
+local_cms_release: /home/ubuntu/radhey/release/cms/
+remote_cms_release: /opt/nginx_cms/

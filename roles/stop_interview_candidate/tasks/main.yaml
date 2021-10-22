@@ -1,0 +1,9 @@
+---
+- name: Cleaning old log of containers
+  shell:
+    cmd: 'sh -c "truncate -s 0 /var/lib/docker/containers/*/*-json.log"'
+  become: yes
+- name: Stopping interview candidate container
+  docker_container:
+    name: nginxinterviewcand
+    state: stopped

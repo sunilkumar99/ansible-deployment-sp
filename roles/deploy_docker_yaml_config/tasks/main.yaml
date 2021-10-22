@@ -1,0 +1,7 @@
+---
+  - name: Synchronization yaml folder
+    synchronize:
+      src: "{{ local_docker_yaml }}"
+      dest: "{{ remote_docker_yaml }}"
+      checksum: yes
+      times: no

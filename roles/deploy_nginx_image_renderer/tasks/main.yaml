@@ -1,0 +1,27 @@
+---
+- name: Copy default.conf file
+  copy:
+    src: default.conf
+    dest: "{{ remote_config_file_path }}"
+    mode: 0644
+    owner: ubuntu
+    group: ubuntu
+  become: yes
+- name: Creating Nginx Image Renderer container
+  docker_container:
+    name: nginxImageRenderer
+    image: nginx
+    recreate: yes
+    pull: yes
+    restart_policy: always
+    detach: yes
+    log_driver: json-file
+    log_opt:
+      max-size: '{{ log_opt_max_size }}'
+      max-file: '{{ log_opt_max_file }}'
+    volumes:
+    - "/efs/snapshot:/usr/share/nginx/html"
+    - "/opt/image_renderer_nginx:/etc/nginx/conf.d"
+    ports:
+    - "9899:80"
+    #memory: '{{ docker_memory_limit }}'

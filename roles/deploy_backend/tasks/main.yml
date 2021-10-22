@@ -1,0 +1,56 @@
+---
+# tasks file for deploy_api
+  - name: populate environment file to /etc/environment
+    lineinfile:
+      path: "/etc/environment"
+      state: present
+      regexp: "^{{ item.key }}="
+      line: "{{ item.key }}={{ item.value}}"
+    with_items: "{{ os_environment }}"
+  - name: Disable Traffic on Selected Machine
+    uri:
+      url: "http://{{ inventory_hostname }}:8282/admin/configure/?trafficStatus=off"
+      follow_redirects: none
+      method: GET
+    register: _result
+    delegate_to: 127.0.0.1
+    ignore_errors: yes
+  - name: Pausing for 60 seconds for connections to drain
+    pause: seconds=60
+  - name: Stopping backend service backendservice
+    service: name=backendservice state=stopped
+  - name: Synchronization yaml folder
+    synchronize:
+      src: "{{ local_docker_yaml }}"
+      dest: "{{ remote_docker_yaml }}"
+      checksum: yes
+      times: no
+  - name: Copy enviroment config file to server
+    copy:
+      src: "{{ local_config_file_path }}"
+      dest: "{{ remote_config_file_path }}"
+      mode: 0644
+      owner: root
+      group: root
+  - name: Copy Exacutable file file to server
+    copy:
+      src: '{{local_release_folder}}'
+      dest: '{{remote_release_folder }}'
+      mode: 0755
+      owner: root
+      group: root
+  - name: Restart backend service backendservice
+    service: name=backendservice state=restarted
+  - name: Wait for port 8282 to Respond
+    wait_for: port=8282 delay=2 timeout=150
+  - name:  Wait for Healthecheckup to succeed
+    delegate_to: 127.0.0.1
+    uri:
+      url: "http://{{ inventory_hostname }}:8282/healthcheck"
+      follow_redirects: none
+      method: GET
+    register: result
+    until: result.status == 200
+    retries: 5
+    delay: 5
+    changed_when: false

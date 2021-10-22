@@ -1,0 +1,21 @@
+---
+- hosts: code1,code2
+  gather_facts: yes
+  become: yes
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - docker-setup
+  tags:
+  - setup
+
+
+- hosts: code1,code2
+  gather_facts: yes
+  user: ubuntu
+  serial: "10%"
+  max_fail_percentage: 100
+  roles:
+  - deploy_docker_face_api
+  tags:
+  - deploy
